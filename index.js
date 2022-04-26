@@ -51,6 +51,14 @@ async function run(){
             res.send(result)
         })
 
+        app.get('/orders' , async (req, res) => {
+            const email = req.query.email
+            const query = {email}
+            const result = ordersData.find(query)
+            const orders = await result.toArray() 
+            res.send(orders)
+        })
+
     }
     finally{
 
