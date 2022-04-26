@@ -16,6 +16,7 @@ async function run(){
     try{
         await client.connect()
         const servicesData = client.db('geniusCarServices').collection('services')
+        const ordersData = client.db('geniusCarServices').collection('orders')
 
         app.get('/services', async (req, res) => {
             const query = {}
@@ -41,6 +42,12 @@ async function run(){
         app.post('/services', async (req, res) => {
             const newService = req.body;
             const result = await servicesData.insertOne(newService)
+            res.send(result)
+        })
+
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            const result = await ordersData.insertOne(order)
             res.send(result)
         })
 
