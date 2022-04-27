@@ -20,8 +20,8 @@ function verifyToken(req, res, next) {
     jwt.verify(token, process.env.ACCESS_TOKEN_KEY, (err, decoded) => {
         if (err) return res.status(403).send({ message: "Forbidden Acess" })
         req.decoded = decoded
+        next()
     })
-    next()
 }
 
 
@@ -82,7 +82,6 @@ async function run() {
                 const query = { email }
                 const result = ordersData.find(query)
                 const orders = await result.toArray()
-                console.log(orders);
                 res.send(orders)
             }
             else{
