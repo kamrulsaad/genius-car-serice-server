@@ -39,7 +39,7 @@ async function run() {
             const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_KEY, {
                 expiresIn: '3d'
             })
-            res.send(accessToken)
+            res.send({accessToken})
         })
 
         app.get('/services', async (req, res) => {
